@@ -2,7 +2,7 @@ import os
 import os.path as osp
 import pandas as pd
 import time
-
+import k_gnn import TwoLocal
 import torch
 import torch.nn.functional as F
 from torch_sparse import coalesce
@@ -21,3 +21,4 @@ try:
     rdBase.DisableLog('rdApp.error')
 except ImportError:
     print("Install rdkit")
+
