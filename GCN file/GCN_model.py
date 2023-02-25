@@ -7,6 +7,8 @@ import torch.optim as optim
 from torch_geometric.nn import GCNConv
 from torch_geometric.nn import global_add_pool
 
+# Model definition used for regression
+
 class GCNlayer(nn.Module):
     
     def __init__(self, n_features, conv_dim1, conv_dim2, conv_dim3, concat_dim, dropout):
@@ -53,10 +55,11 @@ class FClayer(nn.Module):
         self.out_dim = out_dim
         self.dropout = dropout
 
-        self.fc1 = Linear(self.concat_dim, self.pred_dim1)
+        # Should I apply bias to the linear layer ?
+        self.fc1 = Linear(self.concat_dim, self.pred_dim1,bias=True)
         self.bn1 = BatchNorm1d(self.pred_dim1)
-        self.fc2 = Linear(self.pred_dim1, self.pred_dim2)
-        self.fc3 = Linear(self.pred_dim2, self.out_dim)
+        self.fc2 = Linear(self.pred_dim1, self.pred_dim2,bias=True)
+        self.fc3 = Linear(self.pred_dim2, self.out_dim,bias=True) 
     
     def forward(self, data):
         x = F.relu(self.fc1(data))
@@ -67,9 +70,9 @@ class FClayer(nn.Module):
         return x
 
 # Model definition  
-class Net_model(nn.Module):
+class GCN_Model_reg(nn.Module):
     def __init__(self, args):
-        super(Net_model, self).__init__()
+        super(GCN_Model_reg, self).__init__()
         
         # Convolutional Layer call
         self.conv = GCNlayer(args.n_features,args.conv_dim1,args.conv_dim2,args.conv_dim3,args.concat_dim,args.dropout)
@@ -78,7 +81,6 @@ class Net_model(nn.Module):
         self.fc = FClayer(args.concat_dim,args.pred_dim1,args.pred_dim2,args.out_dim,args.dropout)
         
     def forward(self, data):
-        x = self.conv(data) # Calling the convolutional layer
+        x = self.conv(data) # Calling the convolutional layercpu
         x = self.fc(x) # Calling the Fully Connected Layer
-        x = F.linear(x, dim=1)  # Linear function for evaluating regression layer
         return x
