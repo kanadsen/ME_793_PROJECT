@@ -1,0 +1,3 @@
+#!C:\Users\kanad\Desktop\Github repos\ME_793_PROJECT\793_env\Scripts\python.exe
+from numba.pycc import main
+main()
