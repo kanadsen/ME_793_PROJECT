@@ -142,7 +142,7 @@ paser = argparse.ArgumentParser()
 args = paser.parse_args("")
 np.random.seed(200)
 torch.manual_seed(seed)
-device='cuda'
+device='cpu'
 device = torch.device(device)
 #'cuda' if torch.cuda.is_available() else
 device
