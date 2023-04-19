@@ -142,7 +142,7 @@ paser = argparse.ArgumentParser()
 args = paser.parse_args("")
 np.random.seed(200)
 torch.manual_seed(seed)
-device='cuda'
+device='cuda' if torch.cuda.is_available() else 'cpu'
 device = torch.device(device)
 #'cuda' if torch.cuda.is_available() else
 device
@@ -468,7 +468,7 @@ dataset = dataset[~((dataset < lower_bound) | (dataset > upper_bound)).any(axis=
 
 
 
-
+ 
 
 
 
