@@ -1,8 +1,8 @@
 #import streamlit as st
 import numpy as np
 import streamlit as st
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
+#from plotly.subplots import make_subplots
+#import plotly.graph_objects as go
 
 
 # set default page config to wide
