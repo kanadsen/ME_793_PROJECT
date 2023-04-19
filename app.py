@@ -14,7 +14,7 @@ st.markdown(f"<h3 style='text-align: center;'>{title_txt}</h1> <br><br>",unsafe_
 
 from main_ECC_file import*
 
-model=torch.load('MPNN_file\ECC_model.pt')
+model=torch.load('ECC_model.pt')
 model.eval()
 smiles_data=''
 correct_boiling_point=0
