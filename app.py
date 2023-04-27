@@ -46,9 +46,11 @@ with col3:
    #print(model(test_X))
    test_loader = DataLoader(test_X, batch_size=len(test_X), shuffle=False)
    test_score,model,y_score,y_test=test(model, device,test_loader, args)
+   y_score=np.array(y_score)
+   y_score=y_score*(max_val-min_val)+min_val
+   y_score=y_score*std+mean
    print(y_score)
-   y_score[0]=y_score[0]*(max_val-min_val)+min_val
-   y_score[0]=y_score[0]*std+mean
+   #y_score[0][0]=np.sum(np.array(y_score)) # Changed
    y_score[0][0] = round(y_score[0][0],3)
    #st.write(f'Boiling point {y_score[0]}')
    mae = abs(y_score[0][0] - c1 )
